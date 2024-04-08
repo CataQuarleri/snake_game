@@ -1,22 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./src/script.js" defer></script>
-    <link rel="stylesheet" href="./src/styles.css">
-</head>
-<body>
-    <h1 class="title">Snake Game</h1>
-    <div id="customizations" class="customizations">
-        <label for="bodyColor" >Snake Body</label>
-        <input type="color" class="style1" name="bodyColor" id="bodyColor">
-        <label for="headColor" >Snake Head</label>
-        <input type="color" class="style1" name="headColor" id="headColor">
-        <label for="bodyBorder" >Snake Borders</label>
-        <input type="color" class="style1" name="bodyBorder" id="bodyBorder">
-    </div>
-    <canvas id="snakeboard" width="600" height="600"></canvas>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Document</title>
+		<script
+			src="./src/script.js"
+			defer
+		></script>
+		<link
+			rel="stylesheet"
+			href="./src/styles.css"
+		/>
+	</head>
+	<body>
+		<h1 class="title">Snake Game</h1>
+		<div
+			id="customizations"
+			class="customizations"
+		>
+			<label for="bodyColor">Snake Body</label>
+			<input
+				type="color"
+				value="#E16C22"
+				class="style1"
+				name="bodyColor"
+				id="bodyColor"
+			/>
+			<label for="headColor">Snake Head</label>
+			<input
+				type="color"
+				value="#E16C22"
+				class="style1"
+				name="headColor"
+				id="headColor"
+			/>
+			<!-- <label for="bodyBorder">Snake Borders</label>
+			<input
+				type="color"
+				class="style1"
+				name="bodyBorder"
+				id="bodyBorder"
+			/> -->
+		</div>
+        <div><p>SCORE: </p><p id="score"></p></div>
+		<canvas
+			id="snakeboard"
+			width="600"
+			height="600"
+            z-index="-1"
+		></canvas>
+        <button class="startBtn" id="startBtn" z-index="1">Start!</button>
+        <div class="gameOver" id="gameOver">Game Over</div>
+        <button class="playAgain" id="playAgain">Play again</button>
+	</body>
 </html>
