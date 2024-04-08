@@ -1,7 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 #snakeboard {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 2px solid black
+  }
+
+  .style1 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+  }
+  .style1::-webkit-color-swatch {
+    border-radius: 50%;
+    border: 3px solid #000000;
+  }
+  .style1::-moz-color-swatch {
+    border-radius: 50%;
+    border: 3px solid #000000;
   }
