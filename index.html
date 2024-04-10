@@ -17,41 +17,61 @@
 		/>
 	</head>
 	<body>
-        <main>
-		<h1 class="title">Snake Game</h1>
-		<div
-			id="customizations"
-			class="customizations"
-		>
-			<label for="bodyColor">Snake Body</label>
-			<input
-				type="color"
-				value="#E16C22"
-				class="style1"
-				name="bodyColor"
-				id="bodyColor"
-			/>
-			<label for="headColor">Snake Head</label>
-			<input
-				type="color"
-				value="#E16C22"
-				class="style1"
-				name="headColor"
-				id="headColor"
-			/>
-		</div>
-        <div><p>SCORE: </p><p id="score"></p></div>
-        <div class="border">
-		<canvas
-			id="snakeboard"
-			width="600"
-			height="600"
-            z-index="-1"
-		></canvas>
-    </div>
-        <button class="startBtn" id="startBtn" z-index="1">Start!</button>
-        <div class="gameOver" id="gameOver">Game Over</div>
-        <button class="playAgain" id="playAgain">Play again</button>
-    </main>
+		<main>
+			<h1 class="title">Snake Game</h1>
+			<div
+				id="customizations"
+				class="customizations"
+			>
+				<label for="bodyColor">Snake Body</label>
+				<input
+					type="color"
+					value="#E16C22"
+					class="style1"
+					name="bodyColor"
+					id="bodyColor"
+				/>
+				<label for="headColor">Snake Head</label>
+				<input
+					type="color"
+					value="#E16C22"
+					class="style1"
+					name="headColor"
+					id="headColor"
+				/>
+			</div>
+			<div>
+				<p>SCORE:</p>
+				<p id="score"></p>
+			</div>
+			<div class="border">
+				<canvas
+					id="snakeboard"
+					width="600"
+					height="600"
+					z-index="-1"
+				></canvas>
+			</div>
+			<button
+				class="startBtn"
+				id="startBtn"
+				z-index="1"
+			>
+				<span class="small">Press Enter or Click</span>
+				Start!
+			</button>
+			<div
+				class="gameOver"
+				id="gameOver"
+			>
+				Game Over
+			</div>
+			<button
+				class="playAgain"
+				id="playAgain"
+			>
+				Play again
+			</button>
+		</main>
 	</body>
 </html>

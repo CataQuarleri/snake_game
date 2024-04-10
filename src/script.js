@@ -19,6 +19,8 @@ let snake = [
 	{ x: 160, y: 100 }
 ];
 
+let gameState = 'paused';
+
 let dx = 10;
 let dy = 0;
 
@@ -144,6 +146,7 @@ const endOfGame = function () {
 			gameOver.style.display = 'block';
 			playAgain.style.display = 'block';
 			startButton.style.display = 'none';
+			gameState = 'paused';
 			return true;
 		}
 	}
@@ -156,6 +159,7 @@ const endOfGame = function () {
 		gameOver.style.display = 'block';
 		playAgain.style.display = 'block';
 		startButton.style.display = 'none';
+		gameState = 'paused';
 	}
 
 	return hitBottomWall || hitLeftWall || hitRightWall || hitTopWall;
@@ -167,7 +171,7 @@ document.addEventListener('keydown', changeDirection);
 const main = function () {
 	let score = document.getElementById('score');
 	score.textContent = `${(snake.length - 5) * 10}`;
-
+	gameState = 'running';
 	if (endOfGame()) return;
 	setTimeout(function timer() {
 		moveSnake();
@@ -175,7 +179,7 @@ const main = function () {
 		drawSnake();
 		drawFood();
 		requestAnimationFrame(main);
-	}, 100);
+	}, 10);
 };
 
 //buttons
@@ -183,13 +187,7 @@ const gameOver = document.getElementById('gameOver');
 const startButton = document.getElementById('startBtn');
 const playAgain = document.getElementById('playAgain');
 
-playAgain.addEventListener('click', function () {
-	gameOver.style.display = 'none';
-	startButton.style.display = 'block';
-	playAgain.style.display = 'none';
-});
-
-startButton.addEventListener('click', function () {
+function startGame() {
 	snake = [
 		{ x: 200, y: 100 },
 		{ x: 190, y: 100 },
@@ -202,4 +200,20 @@ startButton.addEventListener('click', function () {
 	startButton.style.display = 'none';
 	playAgain.style.display = 'none';
 	gameOver.style.display = 'none';
+}
+
+playAgain.addEventListener('click', function () {
+	gameOver.style.display = 'none';
+	startButton.style.display = 'block';
+	playAgain.style.display = 'none';
+});
+
+startButton.addEventListener('click', ()=>startGame());
+
+
+document.addEventListener('keydown', function (e) {
+	let playAgainButtonShows = getComputedStyle(playAgain, null).display == 'block'
+	if (gameState == 'paused' && e.key == "Enter" && !playAgainButtonShows) {
+		startGame()
+	}
 });
