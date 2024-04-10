@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
 }
 
 main{
@@ -16,6 +17,8 @@ body {
   margin: 30px;
   display: flex;
   flex-flow: column;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/687/194/original/farm-scene-with-many-apple-trees-free-vector.jpg");
+
 }
 
 .border {
