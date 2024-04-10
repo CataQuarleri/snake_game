@@ -27,6 +27,8 @@ let dy = 0;
 let foodX;
 let foodY;
 
+let speed = 100;
+
 //Customized colors
 const customizations = document.getElementById('customizations');
 
@@ -167,19 +169,29 @@ const endOfGame = function () {
 
 document.addEventListener('keydown', changeDirection);
 
+const levelUp = function (){
+	console.log("SPEED", speed)
+	console.log("score", score.textContent)
+
+	// if (score.textContent > 10 && score.textContent % 15 == 0){
+	// 	return speed -= 10
+	// }
+}
+
 //Calls all functions
 const main = function () {
 	let score = document.getElementById('score');
 	score.textContent = `${(snake.length - 5) * 10}`;
 	gameState = 'running';
 	if (endOfGame()) return;
+	levelUp()
 	setTimeout(function timer() {
 		moveSnake();
 		clearCanvas();
 		drawSnake();
 		drawFood();
 		requestAnimationFrame(main);
-	}, 10);
+	}, speed);
 };
 
 //buttons
