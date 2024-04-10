@@ -27,8 +27,15 @@ let dy = 0;
 let foodX;
 let foodY;
 
-let speed = 100;
+let speed = 180;
 
+const speedControl = () => {
+	if (speed > 135){
+		speed -= 10
+	}else {
+		speed-=3
+	}
+}
 //Customized colors
 const customizations = document.getElementById('customizations');
 
@@ -73,6 +80,7 @@ function randomFood(min, max) {
 }
 
 function generateFood() {
+	speedControl()
 	foodX = randomFood(0, snakeboard.width - 15);
 	foodY = randomFood(0, snakeboard.height - 15);
 	snake.forEach((part) => {
@@ -169,14 +177,14 @@ const endOfGame = function () {
 
 document.addEventListener('keydown', changeDirection);
 
-const levelUp = function (){
-	console.log("SPEED", speed)
-	console.log("score", score.textContent)
+const levelUp = function () {
+	console.log('SPEED', speed);
+	console.log('score', score.textContent);
 
 	// if (score.textContent > 10 && score.textContent % 15 == 0){
 	// 	return speed -= 10
 	// }
-}
+};
 
 //Calls all functions
 const main = function () {
@@ -184,7 +192,7 @@ const main = function () {
 	score.textContent = `${(snake.length - 5) * 10}`;
 	gameState = 'running';
 	if (endOfGame()) return;
-	levelUp()
+	levelUp();
 	setTimeout(function timer() {
 		moveSnake();
 		clearCanvas();
@@ -220,12 +228,11 @@ playAgain.addEventListener('click', function () {
 	playAgain.style.display = 'none';
 });
 
-startButton.addEventListener('click', ()=>startGame());
-
+startButton.addEventListener('click', () => startGame());
 
 document.addEventListener('keydown', function (e) {
-	let playAgainButtonShows = getComputedStyle(playAgain, null).display == 'block'
-	if (gameState == 'paused' && e.key == "Enter" && !playAgainButtonShows) {
-		startGame()
+	let playAgainButtonShows = getComputedStyle(playAgain, null).display == 'block';
+	if (gameState == 'paused' && e.key == 'Enter' && !playAgainButtonShows) {
+		startGame();
 	}
 });
