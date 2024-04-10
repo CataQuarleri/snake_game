@@ -4,11 +4,29 @@
   box-sizing: border-box;
 }
 
+main{
+  display: flex;
+  flex-flow: wrap column;
+  justify-content: center;
+  align-content: center;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   margin: 30px;
   display: flex;
   flex-flow: column;
+}
+
+.border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border: 5px solid rgb(237, 12, 226);
+  margin-top: 20px;
 }
 .startBtn {
   position: absolute;

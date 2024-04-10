@@ -17,6 +17,7 @@
 		/>
 	</head>
 	<body>
+        <main>
 		<h1 class="title">Snake Game</h1>
 		<div
 			id="customizations"
@@ -38,23 +39,19 @@
 				name="headColor"
 				id="headColor"
 			/>
-			<!-- <label for="bodyBorder">Snake Borders</label>
-			<input
-				type="color"
-				class="style1"
-				name="bodyBorder"
-				id="bodyBorder"
-			/> -->
 		</div>
         <div><p>SCORE: </p><p id="score"></p></div>
+        <div class="border">
 		<canvas
 			id="snakeboard"
 			width="600"
 			height="600"
             z-index="-1"
 		></canvas>
+    </div>
         <button class="startBtn" id="startBtn" z-index="1">Start!</button>
         <div class="gameOver" id="gameOver">Game Over</div>
         <button class="playAgain" id="playAgain">Play again</button>
+    </main>
 	</body>
 </html>
