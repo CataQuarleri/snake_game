@@ -7,10 +7,14 @@
 //"2 players game":  second screen or board for a 2 player game with limited time, the one with more points wins. Uses arrows on qwerty: "AWDS"
 //"The world gets smaller": after certain level a fortress starts to build around the canvas, the board gets smaller
 //"Speed up!": every 20 points the game gets faster
+// import apple from "../img/imagesURL.mjs";
 
+const apple =
+	'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAMAAAAMCGV4AAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAF9UExURQAAALyoHo+CKRodNjQ0NLmmHTIyMtQ1FsV2Gv8ABOhXGdw5GuI4GYAAANM0FtQ0Fv+HMN87GuE5Gf9VANY1FuA4GNc2Fv9TIeQ7IeA4F9Q0FdI0FdIzFeI5GcgvFNAzFeE5Gtg1FtM0FeQ8GeI6GdEzFNEzFcwtF7qnHcayIcy3Isy3IrilHb2qHsy3I0A+MSMlNLepHb2rHrupIlhZL9MxFdY8F8Z9G5F0Jb09H+M5GeE5GdU0FtIzFdM0Ft03GOE3Gdc3G+A5GeE5GeE5GeE5GeE4GdM0FdEzFeE5GeE5GdQ0FtEzFeE5GeE5GdM0FtEzFeE5GeE5GdM0FtEzFeE5GdIzFdEzFeE5GeE5GdU0FtIzFeE5GeI5GdIzFdEzFeE5GdQ0FdEzFeE5GeE5GdI0FdIzFdk2F+E5GeE5GeE5GdQ0FdQ0Ft03GOE5GeE5GeE5GeE5Gci0Idg2F+E5GdIzFd03GNI0Fd44GNEzFds3GNc1F9M0Ft84GP///4cXyaYAAABydFJOUwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOjYASGNmIEwJp7dMrGjRZYigsFwp31+7cyN3r03IJefz7cx/c2R1E9/dCSPhFKujlKAm3rwdd+1INqqIKH676+KwcE2adnpVfEW3YvuAAAAABYktHRH4/uEFzAAAAB3RJTUUH6AQLExMChcMvGQAAAL9JREFUCNdjYGBgYNTQ1NJmYmZhgAJWHd0iPX0DNiiXnYPT0MjYhIubh4cXyOXjFzA1M7ewtLIWFBISZhDht7G1s3dwdHJ2cXUTEmUQE3f3KC4BA08vCUkGKW+f0jIIv8TXT4hB2j+gvALKDwwSYpAJDkHwQ4H8sPBSGD8iUoiBPyq6sgrKj4mVZZCTj4uvhipPEFJgUFRKTKqpBfOTU4SUGRiUpFPT0oG8jMwsIRWge1XVZLJzcvPyCwqFVNQZAKecOzHPVAcYAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDI0LTA0LTExVDE5OjE4OjU4KzAwOjAwI1eWawAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyNC0wNC0xMVQxOToxODo1OCswMDowMFIKLtcAAAAodEVYdGRhdGU6dGltZXN0YW1wADIwMjQtMDQtMTFUMTk6MTk6MDIrMDA6MDAGTTUcAAAAAElFTkSuQmCC';
 const snakeboard = document.getElementById('snakeboard');
 const snakeboard_ctx = snakeboard.getContext('2d');
 
+console.log('APPLE', apple);
 let snake = [
 	{ x: 200, y: 100 },
 	{ x: 190, y: 100 },
@@ -30,12 +34,12 @@ let foodY;
 let speed = 180;
 
 const speedControl = () => {
-	if (speed > 135){
-		speed -= 10
-	}else {
-		speed-=3
+	if (speed > 135) {
+		speed -= 10;
+	} else {
+		speed -= 3;
 	}
-}
+};
 //Customized colors
 const customizations = document.getElementById('customizations');
 
@@ -69,10 +73,15 @@ const drawSnake = function () {
 };
 
 function drawFood() {
-	snakeboard_ctx.fillStyle = 'red';
-	snakeboard_ctx.strokestyle = 'black';
-	snakeboard_ctx.fillRect(foodX, foodY, 12, 12);
-	snakeboard_ctx.strokeRect(foodX, foodY, 12, 12);
+	// snakeboard_ctx.fillStyle = 'red';
+	// snakeboard_ctx.strokestyle = 'black';
+	// snakeboard_ctx.fillRect(foodX, foodY, 12, 12);
+	// snakeboard_ctx.strokeRect(foodX, foodY, 12, 12);
+	let img = new Image();
+	img.onload = function () {
+		snakeboard_ctx.drawImage(img, foodX, foodY); // Or at whatever offset you like
+	};
+	img.src = apple;
 }
 
 function randomFood(min, max) {
@@ -80,9 +89,11 @@ function randomFood(min, max) {
 }
 
 function generateFood() {
-	speedControl()
+	speedControl();
+
 	foodX = randomFood(0, snakeboard.width - 15);
 	foodY = randomFood(0, snakeboard.height - 15);
+
 	snake.forEach((part) => {
 		const isEaten = part.x == foodX && part.y == foodY;
 		if (isEaten) generateFood();
@@ -101,10 +112,15 @@ const clearCanvas = function () {
 		let randomNumber = getRndInteger(0, random.length);
 		bgColor = `${random[randomNumber]}`;
 	}
-	snakeboard_ctx.fillStyle = bgColor;
-	snakeboard_ctx.strokeStyle = 'black';
-	snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
-	snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
+	snake.forEach((segment) => {
+		// Clear the portion of the canvas occupied by the current snake segment
+		snakeboard_ctx.fillStyle = bgColor;
+		snakeboard_ctx.strokeStyle = 'black';
+		snakeboard_ctx.fillRect(segment.x, segment.y, 15, 15); // Assuming each segment is 15x15 pixels
+	});
+
+	// snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
+	// snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
 };
 
 const moveSnake = function () {
@@ -130,23 +146,24 @@ const changeDirection = function (e) {
 	const goingDown = dy === 10;
 	const goingRight = dx === 10;
 	const goingLeft = dx === -10;
-
-	if (keyPressed === LEFT_KEY && !goingRight) {
-		dx = -10;
-		dy = 0;
-	}
-	if (keyPressed === UP_KEY && !goingDown) {
-		dx = 0;
-		dy = -10;
-	}
-	if (keyPressed === RIGHT_KEY && !goingLeft) {
-		dx = 10;
-		dy = 0;
-	}
-	if (keyPressed === DOWN_KEY && !goingUp) {
-		dx = 0;
-		dy = 10;
-	}
+	setTimeout(() => {
+		if (keyPressed === LEFT_KEY && !goingRight) {
+			dx = -10;
+			dy = 0;
+		}
+		if (keyPressed === UP_KEY && !goingDown) {
+			dx = 0;
+			dy = -10;
+		}
+		if (keyPressed === RIGHT_KEY && !goingLeft) {
+			dx = 10;
+			dy = 0;
+		}
+		if (keyPressed === DOWN_KEY && !goingUp) {
+			dx = 0;
+			dy = 10;
+		}
+	}, 50);
 };
 
 const endOfGame = function () {
@@ -194,8 +211,8 @@ const main = function () {
 	if (endOfGame()) return;
 	levelUp();
 	setTimeout(function timer() {
-		moveSnake();
 		clearCanvas();
+		moveSnake();
 		drawSnake();
 		drawFood();
 		requestAnimationFrame(main);
@@ -215,6 +232,9 @@ function startGame() {
 		{ x: 170, y: 100 },
 		{ x: 160, y: 100 }
 	];
+	dx = 10;
+	dy = 0;
+	speed = 180;
 	main();
 	generateFood();
 	startButton.style.display = 'none';
