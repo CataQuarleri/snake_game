@@ -235,6 +235,10 @@ function startGame() {
 	dx = 10;
 	dy = 0;
 	speed = 180;
+	snakeboard_ctx.fillStyle = 'white';
+	snakeboard_ctx.strokeStyle = 'black';
+	snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
+	snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
 	main();
 	generateFood();
 	startButton.style.display = 'none';
